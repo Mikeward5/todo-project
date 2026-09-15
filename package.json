@@ -15,7 +15,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "webpack"
+    "start": "webpack",
+    "dev": "webpack serve --open"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
@@ -27,6 +28,9 @@
     "webpack": "^5.110.3",
     "webpack-cli": "^7.2.3",
     "webpack-dev-server": "^6.0.0"
+  },
+  "dependencies": {
+    "date-fns": "^4.4.0",
+    "nanoid": "^6.0.1"
   }
 }
-
