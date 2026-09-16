@@ -13,24 +13,36 @@ body {
     background: linear-gradient(-45deg, blue, red)
 }
 
-#todos,
-#projects ,
-#spare {
-    border: 3px solid black;
-    width: 300px;
-    height: 400px;
-    background-color: #fff;
+#todos {
+    width: 600px;
+    max-height: 800px;
     display: flex;
     flex-direction: column;
-}
-
-#todos div {
-    border: 1px solid black;
-    height: 40px;
     overflow: scroll;
 }
 
-#addTodo {
-    width: 100px;
-    position: relative;
+#todos div {
+    background-color: pink;
+    overflow: scroll;
+    margin-bottom: 10px;
+    
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: yellow;
+}
+
+.cardDescription {
+    margin: 10px 10px;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-around;
+}
+
+.deleteButton {
+    width: 20px;
 }
