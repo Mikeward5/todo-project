@@ -7,6 +7,14 @@ import {
   changeTodoPriority,
   getTodos,
 } from "./todoController.js";
+import {
+  createNewProject,
+  getProjects,
+  pushTodoIntoProject,
+  deleteProject,
+  changeProjectName,
+  changeProjectDescription,
+} from "./projectController.js";
 
 //const body = document.querySelector('body');
 const todos = document.querySelector("#todos");
@@ -123,4 +131,14 @@ export function initialise() {
   changeTodoPriority(1, "High");
   console.log(getTodos());
   renderTodoList();
+  createNewProject(1, "fishing", "fishing project");
+  pushTodoIntoProject(2, 1);
+
+  console.log(getTodos());
+  console.log(getProjects());
+
+  deleteProject(1);
+
+  console.log(getTodos());
+  console.log(getProjects());
 }

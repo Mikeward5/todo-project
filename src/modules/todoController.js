@@ -41,3 +41,7 @@ export function changeTodoPriority(todoId, newPriority) {
 export function getTodos() {
   return todos;
 }
+
+export function joinArray(array) {
+  array.forEach((item) => todos.push(item));
+}
