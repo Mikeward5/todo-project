@@ -255,7 +255,27 @@ function createTodoElement(todo) {
     changeTodoPriority(todo.id, priority.value);
   });
 
-  cardFooter.append(creationDate, priority);
+  const transfer = document.createElement("select");
+  const projectNames = getProjects();
+  const projectoptions = projectNames.map((item) => {
+    return {
+      name: item.name,
+      projectID: item.projectID,
+    };
+  });
+  projectoptions.forEach((option) => {
+    const priorityOption = document.createElement("option");
+    priorityOption.value = option.projectID;
+    priorityOption.textContent = option.name;
+    transfer.appendChild(priorityOption);
+  });
+
+  transfer.addEventListener("change", () => {
+    pushTodoIntoProject(todo.id, transfer.value);
+    renderTodoList();
+  });
+
+  cardFooter.append(creationDate, priority, transfer);
 
   card.append(cardHeader, cardDescription, cardFooter);
 
@@ -281,15 +301,9 @@ function renderProjectList() {
 }
 
 export function initialise() {
-  addTodo("fish", "go fishing", "low");
-  addTodo("climb", "Go Climbing at Stanage", "High");
-  addTodo("Walk", "Go Climbing at Stanage", "High");
-
   console.log(getTodos());
   createNavElement();
-  createNewProject("fishing", "fishing project");
-  createNewProject("climbing", "go climbing at stanage");
-  createNewProject("walking", "go walking in the highlands");
+
   console.log(getProjects());
   renderProjectList();
 }
