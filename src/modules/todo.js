@@ -1,10 +1,9 @@
 import { date } from "./dateController.js";
-//import {nanoid} from 'nanoid';
+import { nanoid } from "nanoid";
 
 export class Todo {
-  constructor(id, name, description, priority) {
-    //this.id = nanoid(10);
-    this.id = id;
+  constructor(name, description, priority) {
+    this.id = nanoid(10);
     this.name = name;
     this.description = description;
     this.date = date();

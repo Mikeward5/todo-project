@@ -2,8 +2,8 @@ import { Todo } from "./todo.js";
 
 let todos = [];
 
-export function addTodo(id, name, description, priority) {
-  todos.push(new Todo(id, name, description, priority));
+export function addTodo(name, description, priority) {
+  todos.push(new Todo(name, description, priority));
 }
 
 export function actionTodo(todoId) {

@@ -33,6 +33,86 @@ function createNavElement() {
     navigation.appendChild(button);
     button.addEventListener("click", handleNavClick);
   });
+  const form = document.createElement("form");
+  const head = document.createElement("h2");
+  head.textContent = "Add New Todo";
+  const nameLabel = document.createElement("label");
+  nameLabel.textContent = " Name";
+  const nameField = document.createElement("input");
+  const descriptionLabel = document.createElement("label");
+  descriptionLabel.textContent = "Description";
+  const descriptionField = document.createElement("input");
+  nameField.id = "name-field";
+  descriptionField.id = "description-field";
+  const priorityLabel = document.createElement("label");
+  priorityLabel.textContent = "Priority";
+  const priority = document.createElement("select");
+  priority.classList.add("priority");
+  const options = ["Low", "Medium", "High"];
+
+  options.forEach((option) => {
+    const priorityOption = document.createElement("option");
+    priorityOption.value = option;
+    priorityOption.textContent = option;
+
+    priority.appendChild(priorityOption);
+  });
+  const submit = document.createElement("input");
+  submit.textContent = "Submit";
+  submit.type = "submit";
+  submit.value = "submit";
+
+  form.append(
+    head,
+    nameLabel,
+    nameField,
+    descriptionLabel,
+    descriptionField,
+    priorityLabel,
+    priority,
+    submit,
+  );
+
+  const projectform = document.createElement("form");
+  projectform.classList.add("projectForm");
+  const projecthead = document.createElement("h2");
+  projecthead.textContent = "Add New Project";
+  const projectnameLabel = document.createElement("label");
+  projectnameLabel.textContent = " Name";
+  const projectnameField = document.createElement("input");
+  const projectdescriptionLabel = document.createElement("label");
+  projectdescriptionLabel.textContent = "Description";
+  const projectdescriptionField = document.createElement("input");
+  projectnameField.id = "projectname-field";
+  projectdescriptionField.id = "projectdescription-field";
+
+  const projectsubmit = document.createElement("input");
+  projectsubmit.textContent = "Submit";
+  projectsubmit.type = "submit";
+  projectsubmit.value = "submit";
+
+  projectform.append(
+    projecthead,
+    projectnameLabel,
+    projectnameField,
+    projectdescriptionLabel,
+    projectdescriptionField,
+    projectsubmit,
+  );
+
+  projectform.addEventListener("submit", (e) => {
+    e.preventDefault();
+    createNewProject(projectnameField.value, projectdescriptionField.value);
+    renderProjectList();
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    addTodo(nameField.value, descriptionField.value, priority.value);
+    renderTodoList();
+  });
+
+  navigation.append(form, projectform);
 }
 
 function handleNavClick(e) {
@@ -77,23 +157,16 @@ function createProjectElement(project) {
     renderProjectList();
   });
   cardHeader.append(name, deleteButton);
-  const cardDescription = document.createElement("p");
-  cardDescription.classList.add("cardDescription");
-  cardDescription.textContent = project.description;
 
-  cardDescription.addEventListener("click", () => {
-    const input = document.createElement("input");
-    input.value = project.description;
-    cardDescription.replaceWith(input);
-    input.focus();
-
-    input.addEventListener("change", () => {
-      changeProjectDescription(project.projectID, input.value);
-      cardDescription.textContent = project.description;
-      input.replaceWith(cardDescription);
-    });
+  const list = document.createElement("ul");
+  list.classList.add("todoList");
+  const getProjectTodos = project.todoArray;
+  getProjectTodos.forEach((todo) => {
+    const listItem = document.createElement("li");
+    listItem.textContent = todo.name;
+    list.appendChild(listItem);
   });
-  card.append(cardHeader, cardDescription);
+  card.append(cardHeader, list);
 
   return card;
 }
@@ -208,17 +281,15 @@ function renderProjectList() {
 }
 
 export function initialise() {
-  addTodo(1, "fish", "go fishing", "low");
-  addTodo(2, "climb", "Go Climbing at Stanage", "High");
-  addTodo(3, "Walk", "Go Climbing at Stanage", "High");
-  actionTodo(1);
-  changeTodoName(1, "fishing");
-  changeTodoDescription(1, "New Description to be added here");
-  changeTodoPriority(1, "High");
+  addTodo("fish", "go fishing", "low");
+  addTodo("climb", "Go Climbing at Stanage", "High");
+  addTodo("Walk", "Go Climbing at Stanage", "High");
+
   console.log(getTodos());
   createNavElement();
-  //renderTodoList();
-  createNewProject(1, "fishing", "fishing project");
-  createNewProject(2, "climbing", "go climbing at stanage");
-  createNewProject(3, "walking", "go walking in the highlands");
+  createNewProject("fishing", "fishing project");
+  createNewProject("climbing", "go climbing at stanage");
+  createNewProject("walking", "go walking in the highlands");
+  console.log(getProjects());
+  renderProjectList();
 }

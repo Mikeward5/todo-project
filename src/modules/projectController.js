@@ -3,8 +3,8 @@ import { getTodos, deleteTodo, joinArray } from "./todoController.js";
 
 let projects = [];
 
-export function createNewProject(projectID, name, description) {
-  projects.push(new Project(projectID, name, description));
+export function createNewProject(name, description) {
+  projects.push(new Project(name, description));
 }
 
 export function pushTodoIntoProject(id, projectID) {
